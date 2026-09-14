@@ -62,7 +62,7 @@
                         <strong>Email</strong>
 
                         <span>
-                            contact@ongdkl.org
+                         ongdkl01@gmail.com
                         </span>
                     </div>
 
@@ -79,7 +79,7 @@
                         <strong>Téléphone</strong>
 
                         <span>
-                            +243 XXX XXX XXX
+                            +243 822 210 2207
                         </span>
                     </div>
 

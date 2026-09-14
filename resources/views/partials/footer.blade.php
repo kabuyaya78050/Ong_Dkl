@@ -64,9 +64,9 @@
 
             <p>Kinshasa, RDC</p>
 
-            <p>+243 XXX XXX XXX</p>
+            <p>+243 822 210 2207</p>
 
-            <p>contact@ongdkl.org</p>
+            <p>ongdkl01@gmail.com</p>
 
         </div>
 

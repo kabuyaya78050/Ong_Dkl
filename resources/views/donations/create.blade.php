@@ -8,6 +8,7 @@
 
     <div class="container">
 
+        {{-- En-tête --}}
         <div class="donation-header">
 
             <span class="section-label">
@@ -21,7 +22,7 @@
             <p>
                 Votre générosité contribue directement à améliorer
                 les conditions de vie et les opportunités offertes
-                aux enfants.
+                aux enfants et aux jeunes.
             </p>
 
         </div>
@@ -29,6 +30,7 @@
 
         <div class="donation-form-wrapper">
 
+            {{-- FORMULAIRE --}}
             <form
                 method="POST"
                 action="{{ route('donations.store') }}"
@@ -39,7 +41,6 @@
 
 
                 {{-- Projet --}}
-
                 <div class="form-group">
 
                     <label for="project_id">
@@ -77,8 +78,7 @@
                 </div>
 
 
-                {{-- Nom --}}
-
+                {{-- Nom complet --}}
                 <div class="form-group">
 
                     <label for="donor_name">
@@ -103,8 +103,7 @@
                 </div>
 
 
-                {{-- Email --}}
-
+                {{-- Email + Téléphone --}}
                 <div class="form-row">
 
                     <div class="form-group">
@@ -130,20 +129,19 @@
                     </div>
 
 
-                    {{-- Téléphone --}}
-
                     <div class="form-group">
 
                         <label for="phone">
-                            Téléphone
+                            Numéro Mobile Money *
                         </label>
 
                         <input
-                            type="text"
+                            type="tel"
                             name="phone"
                             id="phone"
                             value="{{ old('phone') }}"
-                            placeholder="+243..."
+                            placeholder="+243 XXX XXX XXX"
+                            required
                         >
 
                         @error('phone')
@@ -158,7 +156,6 @@
 
 
                 {{-- Montant --}}
-
                 <div class="form-group">
 
                     <label for="amount">
@@ -173,13 +170,13 @@
                             id="amount"
                             value="{{ old('amount') }}"
                             min="1"
-                            step="0.01"
-                            placeholder="50"
+                            step="1"
+                            placeholder="50000"
                             required
                         >
 
                         <span>
-                            USD
+                            CDF
                         </span>
 
                     </div>
@@ -193,76 +190,79 @@
                 </div>
 
 
-                {{-- Méthode de paiement --}}
-
+                {{-- Opérateur Mobile Money --}}
                 <div class="form-group">
 
                     <label>
-                        Mode de paiement *
+                        Opérateur Mobile Money *
                     </label>
 
                     <div class="payment-options">
 
+                        {{-- M-Pesa --}}
                         <label class="payment-option">
 
                             <input
                                 type="radio"
                                 name="payment_method"
-                                value="mobile_money"
-                                {{ old('payment_method') == 'mobile_money' ? 'checked' : '' }}
+                                value="mpesa"
+                                {{ old('payment_method') === 'mpesa' ? 'checked' : '' }}
                                 required
                             >
 
                             <span>
-                                Mobile Money
+                                M-Pesa
                             </span>
 
                         </label>
 
 
+                        {{-- Orange Money --}}
                         <label class="payment-option">
 
                             <input
                                 type="radio"
                                 name="payment_method"
-                                value="bank"
-                                {{ old('payment_method') == 'bank' ? 'checked' : '' }}
+                                value="orange_money"
+                                {{ old('payment_method') === 'orange_money' ? 'checked' : '' }}
                             >
 
                             <span>
-                                Virement bancaire
+                                Orange Money
                             </span>
 
                         </label>
 
 
+                        {{-- Airtel Money --}}
                         <label class="payment-option">
 
                             <input
                                 type="radio"
                                 name="payment_method"
-                                value="cash"
-                                {{ old('payment_method') == 'cash' ? 'checked' : '' }}
+                                value="airtel_money"
+                                {{ old('payment_method') === 'airtel_money' ? 'checked' : '' }}
                             >
 
                             <span>
-                                Espèces
+                                Airtel Money
                             </span>
 
                         </label>
 
 
+                        {{-- AfriMoney --}}
                         <label class="payment-option">
 
                             <input
                                 type="radio"
                                 name="payment_method"
-                                value="online"
-                                {{ old('payment_method') == 'online' ? 'checked' : '' }}
+                                value="afrimoney"
+                                {{ old('payment_method') === 'afrimoney' ? 'checked' : '' }}
                             >
 
                             <span>
-                                Paiement en ligne
+                                AfriMoney
                             </span>
 
                         </label>
@@ -279,7 +279,6 @@
 
 
                 {{-- Message --}}
-
                 <div class="form-group">
 
                     <label for="message">
@@ -302,16 +301,18 @@
                 </div>
 
 
+                {{-- Bouton --}}
                 <button
                     type="submit"
                     class="btn btn-donate donation-submit"
                 >
-                    Continuer mon don
+                    Continuer le paiement
                 </button>
 
             </form>
 
 
+            {{-- INFORMATIONS --}}
             <div class="donation-info">
 
                 <h2>
@@ -323,19 +324,28 @@
                     nos actions auprès des enfants et des jeunes.
                 </p>
 
+
                 <div class="donation-info-item">
                     <strong>01</strong>
-                    <span>Choisissez le projet</span>
+                    <span>Choisissez le projet à soutenir</span>
                 </div>
+
 
                 <div class="donation-info-item">
                     <strong>02</strong>
-                    <span>Indiquez votre contribution</span>
+                    <span>Indiquez le montant de votre don</span>
                 </div>
+
 
                 <div class="donation-info-item">
                     <strong>03</strong>
-                    <span>Choisissez votre moyen de paiement</span>
+                    <span>Choisissez votre opérateur Mobile Money</span>
+                </div>
+
+
+                <div class="donation-info-item">
+                    <strong>04</strong>
+                    <span>Effectuez le paiement et recevez la confirmation</span>
                 </div>
 
             </div>
