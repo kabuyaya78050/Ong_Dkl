@@ -50,11 +50,14 @@ APP_DEBUG=false
 APP_URL=https://ton-app.onrender.com
 
 DB_CONNECTION=pgsql
-DB_HOST=your_render_db_host
+DB_HOST=copy_the_real_render_db_host_here
 DB_PORT=5432
 DB_DATABASE=ong_dkl
 DB_USERNAME=your_db_user
 DB_PASSWORD=your_db_password
+
+# Important : remplace par le vrai host PostgreSQL Render
+# trouvé dans Render > Database > Connections / Host
 
 CACHE_STORE=database
 SESSION_DRIVER=database

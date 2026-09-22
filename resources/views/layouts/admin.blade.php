@@ -18,10 +18,18 @@
         @yield('title', 'Administration - ONG DKL')
     </title>
 
-    <link
-        rel="stylesheet"
-        href="{{ asset('css/admin.css') }}"
-    >
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css'])
+        <link
+            rel="stylesheet"
+            href="{{ asset('css/admin.css') }}"
+        >
+    @else
+        <link
+            rel="stylesheet"
+            href="{{ asset('css/admin.css') }}"
+        >
+    @endif
 </head>
 
 <body>
@@ -244,7 +252,9 @@
 
 
 {{-- JavaScript --}}
-<script src="{{ asset('js/admin.js') }}"></script>
+@if (!file_exists(public_path('build/manifest.json')) && !file_exists(public_path('hot')))
+    <script src="{{ asset('js/admin.js') }}"></script>
+@endif
 
 @stack('scripts')
 

@@ -37,7 +37,7 @@
                     Faire un don
                 </a>
 
-                <a href="#projets"
+                <a href="{{ url('/projects') }}"
                    class="btn btn-outline">
                     Découvrir nos projets
                 </a>
@@ -365,7 +365,7 @@
                         accompagner les enfants dans leur parcours.
                     </p>
 
-                    <a href="{{ url('/projets') }}">
+                    <a href="{{ url('/projects') }}">
                         Découvrir le projet →
                     </a>
 
@@ -399,7 +399,7 @@
                         des jeunes pour leur avenir.
                     </p>
 
-                    <a href="{{ url('/projets') }}">
+                    <a href="{{ url('/projects') }}">
                         Découvrir le projet →
                     </a>
 
@@ -432,7 +432,7 @@
                         familles qui en ont le plus besoin.
                     </p>
 
-                    <a href="{{ url('/projets') }}">
+                    <a href="{{ url('/projects') }}">
                         Découvrir le projet →
                     </a>
 
@@ -603,17 +603,17 @@
         </div>
 
         <div class="stat">
-            <strong>400+</strong>
+            <strong>15+</strong>
             <span>Volontaires</span>
         </div>
 
         <div class="stat">
-            <strong>7500+</strong>
+            <strong>50+</strong>
             <span>Personnes bénéficiaires</span>
         </div>
 
         <div class="stat">
-            <strong>37</strong>
+            <strong>4</strong>
             <span>Projets réalisés</span>
         </div>
 

@@ -13,8 +13,12 @@
         @yield('title', 'ONG DKL')
     </title>
 
-    <link rel="stylesheet"
-          href="{{ asset('css/style.css') }}">
+    @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @else
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    @endif
 </head>
 
 <body>
@@ -27,7 +31,9 @@
 
     @include('partials.footer')
 
-    <script src="{{ asset('js/app.js') }}"></script>
+    @if (!file_exists(public_path('build/manifest.json')) && !file_exists(public_path('hot')))
+        <script src="{{ asset('js/app.js') }}"></script>
+    @endif
 
     @stack('scripts')
 
