@@ -66,7 +66,7 @@ class DonationController extends Controller
 
             'payment_method' => [
                 'required',
-                'in:mpesa,airtel_money,orange_money,africell',
+                'in:mpesa,airtel_money,orange_money,afrimoney,africell',
             ],
 
             'message' => [

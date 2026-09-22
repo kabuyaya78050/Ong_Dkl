@@ -1,8 +1,9 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -14,10 +15,19 @@ return new class extends Migration
                 ->after('amount');
         });
 
-        // Copier les anciennes valeurs vers la nouvelle colonne.
-        DB::table('donations')->update([
-            'payment_method_new' => DB::raw('payment_method::text'),
-        ]);
+        if (DB::getDriverName() === 'sqlite') {
+            foreach (DB::table('donations')->get(['id', 'payment_method']) as $donation) {
+                DB::table('donations')
+                    ->where('id', $donation->id)
+                    ->update([
+                        'payment_method_new' => $donation->payment_method,
+                    ]);
+            }
+        } else {
+            DB::table('donations')->update([
+                'payment_method_new' => DB::raw('payment_method::text'),
+            ]);
+        }
 
         Schema::table('donations', function (Blueprint $table) {
             $table->dropColumn('payment_method');
@@ -39,9 +49,19 @@ return new class extends Migration
                 ->after('amount');
         });
 
-        DB::table('donations')->update([
-            'payment_method_old' => DB::raw('payment_method'),
-        ]);
+        if (DB::getDriverName() === 'sqlite') {
+            foreach (DB::table('donations')->get(['id', 'payment_method']) as $donation) {
+                DB::table('donations')
+                    ->where('id', $donation->id)
+                    ->update([
+                        'payment_method_old' => $donation->payment_method,
+                    ]);
+            }
+        } else {
+            DB::table('donations')->update([
+                'payment_method_old' => DB::raw('payment_method'),
+            ]);
+        }
 
         Schema::table('donations', function (Blueprint $table) {
             $table->dropColumn('payment_method');

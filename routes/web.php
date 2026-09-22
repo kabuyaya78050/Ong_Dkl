@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 
@@ -60,7 +61,7 @@ Route::get('/don/paiement/{donation}', [
 Route::post('/don/callback', [
     DonationController::class,
     'callback'
-])->name('donations.callback');
+])->withoutMiddleware([ValidateCsrfToken::class])->name('donations.callback');
 
 Route::get('/don/merci/{donation}', [
     DonationController::class,
