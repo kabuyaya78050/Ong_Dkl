@@ -78,8 +78,8 @@
         <div class="container">
 
             <p>
-                © {{ date('Y') }} ONG DKL.
-                Tous droits réservés.
+                © conçu par kabuyaya tech.
+    
             </p>
 
         </div>
