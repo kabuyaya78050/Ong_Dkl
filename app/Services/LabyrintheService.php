@@ -45,9 +45,6 @@ class LabyrintheService
         logger()->info('Labyrinthe payment request sent', [
             'reference' => $reference,
             'payment_method' => $paymentMethod,
-            'phone_last_digits' => substr($phone, -4),
-            'amount' => $amount,
-            'callback_host' => parse_url($callback, PHP_URL_HOST),
             'status' => $response->status(),
         ]);
 
@@ -55,9 +52,8 @@ class LabyrintheService
             logger()->warning('Labyrinthe payment rejected', [
                 'reference' => $reference,
                 'payment_method' => $paymentMethod,
-                'phone_last_digits' => substr($phone, -4),
                 'status' => $response->status(),
-                'body' => $response->json(),
+                'message' => $response->json('message') ?? 'Labyrinthe a refusé la demande.',
             ]);
 
             throw new RuntimeException(
@@ -73,7 +69,7 @@ class LabyrintheService
                 'reference' => $reference,
                 'payment_method' => $paymentMethod,
                 'status' => $response->status(),
-                'body' => $data,
+                'message' => $data['message'] ?? 'Labyrinthe a refusé la demande.',
             ]);
 
             throw new RuntimeException(
