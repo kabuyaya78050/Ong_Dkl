@@ -253,7 +253,7 @@
 
 {{-- JavaScript --}}
 @if (!file_exists(public_path('build/manifest.json')) && !file_exists(public_path('hot')))
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="https://ong-dkl-1.onrender.com/js/admin.js"></script>
 @endif
 
 @stack('scripts')
