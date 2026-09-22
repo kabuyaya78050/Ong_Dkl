@@ -598,7 +598,7 @@
     <div class="container stats-grid">
 
         <div class="stat">
-            <strong>1500+</strong>
+            <strong>10+</strong>
             <span>Enfants accompagnés</span>
         </div>
 
