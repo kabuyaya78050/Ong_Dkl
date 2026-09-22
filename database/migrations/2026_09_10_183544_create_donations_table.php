@@ -11,32 +11,41 @@ return new class extends Migration
         Schema::create('donations', function (Blueprint $table) {
             $table->id();
 
+            // Projet soutenu
             $table->foreignId('project_id')
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();
 
+            // Informations du donateur
             $table->string('donor_name');
             $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('phone');
 
+            // Montant
             $table->decimal('amount', 15, 2);
 
+            // Opérateur Mobile Money
             $table->enum('payment_method', [
-                'cash',
-                'mobile_money',
-                'bank',
-                'online'
-            ])->default('cash');
+                'mpesa',
+                'airtel_money',
+                'orange_money',
+                'africell',
+            ]);
 
+            // État du paiement
             $table->enum('status', [
                 'pending',
                 'confirmed',
-                'cancelled'
+                'cancelled',
             ])->default('pending');
 
-            $table->string('transaction_reference')->nullable();
+            // Référence fournie par Labyrinthe
+            $table->string('transaction_reference')
+                ->nullable()
+                ->unique();
 
+            // Message du donateur
             $table->text('message')->nullable();
 
             $table->timestamps();

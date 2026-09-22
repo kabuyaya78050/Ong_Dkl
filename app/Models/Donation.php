@@ -16,9 +16,18 @@ class Donation extends Model
         'payment_method',
         'status',
         'transaction_reference',
+        'order_number',
+        'labyrinthe_reference',
         'message',
     ];
 
+    protected $casts = [
+        'amount' => 'decimal:2',
+    ];
+
+    /**
+     * Projet associé au don.
+     */
     public function project(): BelongsTo
     {
         return $this->belongsTo(Project::class);

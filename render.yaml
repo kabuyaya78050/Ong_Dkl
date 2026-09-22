@@ -1,0 +1,57 @@
+services:
+  - type: web
+    name: ong-dkl
+    env: docker
+    region: frankfurt
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        value: https://ong-dkl.onrender.com
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: ong-dkl-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: ong-dkl-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: ong-dkl-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: ong-dkl-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ong-dkl-db
+          property: password
+      - key: CACHE_STORE
+        value: database
+      - key: SESSION_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: FILESYSTEM_DISK
+        value: public
+      - key: LOG_CHANNEL
+        value: stack
+
+    autoDeploy: true
+
+databases:
+  - name: ong-dkl-db
+    databaseName: ong_dkl
+    user: ong_dkl

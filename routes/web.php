@@ -42,26 +42,30 @@ Route::get('/projects/{slug}', [
 
 /*
 |--------------------------------------------------------------------------
-| DONS - PUBLIC
+| Donations
 |--------------------------------------------------------------------------
 */
 
-Route::get('/don', [
-    DonationController::class,
-    'create'
-])->name('donations.create');
+Route::get('/don', [DonationController::class, 'create'])
+    ->name('donations.create');
 
-Route::post('/don', [
+Route::post('/don', [DonationController::class, 'store'])
+    ->name('donations.store');
+
+Route::get('/don/paiement/{donation}', [
     DonationController::class,
-    'store'
-])->name('donations.store');
+    'pending'
+])->name('donations.pending');
+
+Route::post('/don/callback', [
+    DonationController::class,
+    'callback'
+])->name('donations.callback');
 
 Route::get('/don/merci/{donation}', [
     DonationController::class,
     'success'
 ])->name('donations.success');
-
-
 /*
 |--------------------------------------------------------------------------
 | ADMINISTRATION - AUTHENTIFICATION
