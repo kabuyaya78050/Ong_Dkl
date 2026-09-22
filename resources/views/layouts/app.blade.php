@@ -15,9 +15,9 @@
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="https://ong-dkl-1.onrender.com/css/style.css">
     @else
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="https://ong-dkl-1.onrender.com/css/style.css">
     @endif
 </head>
 

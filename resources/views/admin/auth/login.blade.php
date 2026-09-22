@@ -14,7 +14,7 @@
 
     <link
         rel="stylesheet"
-        href="{{ asset('css/style.css') }}"
+        href="https://ong-dkl-1.onrender.com/css/style.css"
     >
 
 </head>

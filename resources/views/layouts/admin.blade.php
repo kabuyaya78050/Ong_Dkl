@@ -22,12 +22,12 @@
         @vite(['resources/css/app.css'])
         <link
             rel="stylesheet"
-            href="{{ asset('css/admin.css') }}"
+            href="https://ong-dkl-1.onrender.com/css/admin.css"
         >
     @else
         <link
             rel="stylesheet"
-            href="{{ asset('css/admin.css') }}"
+            href="https://ong-dkl-1.onrender.com/css/style.css"
         >
     @endif
 </head>
