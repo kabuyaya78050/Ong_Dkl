@@ -32,7 +32,7 @@
 
             <a href="{{ url('/a-propos') }}">À propos</a>
 
-            <a href="{{ url('/projets') }}">Nos projets</a>
+            <a href="{{ url('/projects') }}">Nos projets</a>
 
             <a href="{{ url('/actualites') }}">Actualités</a>
 
@@ -51,7 +51,7 @@
                 Devenir volontaire
             </a>
 
-            <a href="{{ url('/projets') }}">
+            <a href="{{ url('/projects') }}">
                 Soutenir un projet
             </a>
 
