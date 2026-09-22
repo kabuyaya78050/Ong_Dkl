@@ -40,6 +40,14 @@ class DonationMobilePaymentTest extends TestCase
             'message' => 'Merci pour votre action',
         ]);
 
+        Http::assertSent(function ($request) {
+            $payload = $request->data();
+
+            return $payload['payment_method'] === 'afrimoney'
+                && $payload['phone'] === '0812345678'
+                && $payload['amount'] === 5000;
+        });
+
         $response->assertRedirect(route('donations.pending', ['donation' => 1]));
     }
 

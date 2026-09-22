@@ -113,6 +113,7 @@ class DonationController extends Controller
                 amount: $validated['amount'],
                 reference: $reference,
                 callback: route('donations.callback'),
+                paymentMethod: $validated['payment_method'],
             );
 
             // Enregistrer les références Labyrinthe.

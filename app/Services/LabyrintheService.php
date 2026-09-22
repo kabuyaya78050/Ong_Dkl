@@ -14,7 +14,8 @@ class LabyrintheService
         string $phone,
         float|int $amount,
         string $reference,
-        string $callback
+        string $callback,
+        string $paymentMethod
     ): array {
         $url = config('services.labyrinthe.url');
         $token = config('services.labyrinthe.token');
@@ -25,20 +26,40 @@ class LabyrintheService
             );
         }
 
+        $payload = [
+            'token' => $token,
+            'phone' => $phone,
+            'amount' => $amount,
+            'currency' => 'CDF',
+            'country' => 'CD',
+            'reference' => $reference,
+            'payment_method' => $paymentMethod,
+            'callback' => $callback,
+        ];
+
         $response = Http::timeout(30)
             ->asJson()
             ->acceptJson()
-            ->post($url . '/mobile', [
-                'token' => $token,
-                'phone' => $phone,
-                'amount' => $amount,
-                'currency' => 'CDF',
-                'country' => 'CD',
-                'reference' => $reference,
-                'callback' => $callback,
-            ]);
+            ->post($url . '/mobile', $payload);
+
+        logger()->info('Labyrinthe payment request sent', [
+            'reference' => $reference,
+            'payment_method' => $paymentMethod,
+            'phone_last_digits' => substr($phone, -4),
+            'amount' => $amount,
+            'callback_host' => parse_url($callback, PHP_URL_HOST),
+            'status' => $response->status(),
+        ]);
 
         if ($response->failed()) {
+            logger()->warning('Labyrinthe payment rejected', [
+                'reference' => $reference,
+                'payment_method' => $paymentMethod,
+                'phone_last_digits' => substr($phone, -4),
+                'status' => $response->status(),
+                'body' => $response->json(),
+            ]);
+
             throw new RuntimeException(
                 $response->json('message')
                     ?? 'Impossible d’initier le paiement Labyrinthe.'
@@ -48,6 +69,13 @@ class LabyrintheService
         $data = $response->json();
 
         if (!($data['success'] ?? false)) {
+            logger()->warning('Labyrinthe payment unsuccessful', [
+                'reference' => $reference,
+                'payment_method' => $paymentMethod,
+                'status' => $response->status(),
+                'body' => $data,
+            ]);
+
             throw new RuntimeException(
                 $data['message']
                     ?? 'Labyrinthe a refusé la demande de paiement.'
