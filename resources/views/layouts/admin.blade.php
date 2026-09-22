@@ -27,7 +27,7 @@
     @else
         <link
             rel="stylesheet"
-            href="https://ong-dkl-1.onrender.com/css/style.css"
+            href="https://ong-dkl-1.onrender.com/css/admin.css"
         >
     @endif
 </head>
